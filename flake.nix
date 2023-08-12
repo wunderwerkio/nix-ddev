@@ -6,8 +6,12 @@
     ww-utils.url = "github:wunderwerkio/nix-ww-utils";
   };
 
-  outputs = { self, nixpkgs, ... }: 
-  let
+  outputs = {
+    self,
+    nixpkgs,
+    ww-utils,
+    ...
+  }: let
     systems = [
       # Linux machines
       "x86_64-linux"
@@ -18,16 +22,16 @@
     ];
     forEachSystem = nixpkgs.lib.genAttrs systems;
   in {
-    packages = forEachSystem (system: 
-      let
+    packages = forEachSystem (
+      system: let
         pkgs = nixpkgs.legacyPackages.${system};
-        ddev = pkgs.callPackage ./package/default.nix { inherit nixpkgs system; };
+        ddev = pkgs.callPackage ./package/default.nix {inherit nixpkgs system;};
       in {
         inherit ddev;
         default = ddev;
       }
     );
-    
+
     defaultPackage = forEachSystem (system: self.packages.${system}.ddev);
 
     formatter = ww-utils.lib.forEachWunderwerkSystem (

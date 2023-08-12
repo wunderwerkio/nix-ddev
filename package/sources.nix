@@ -1,5 +1,7 @@
-{ fetchurl, version }:
 {
+  fetchurl,
+  version,
+}: {
   x86_64-linux = fetchurl {
     url = "https://github.com/ddev/ddev/releases/download/v${version}/ddev_linux-amd64.v${version}.tar.gz";
     hash = "sha256-GbM4A18rtv4DUcs5bpqDVgfkMx66/n2w/EA+RFuBwHY=";

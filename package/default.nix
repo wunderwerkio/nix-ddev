@@ -6,7 +6,7 @@
   ...
 }: let
   pname = "ddev";
-  version = "1.22.1";
+  version = "1.22.4";
 
   inherit (stdenv.hostPlatform) system;
   sources = import ./sources.nix {inherit version fetchurl;};
